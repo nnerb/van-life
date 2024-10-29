@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> =  ({ children } ) => {
     <div className="relative overflow-hidden">
       <Navbar />
       {/* Page content goes here */}
-      <div className="pt-[40px] pb-[40px]">
+      <div className="py-[40px]">
         {children}
       </div>
       <Footer />
