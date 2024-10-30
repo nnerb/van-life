@@ -9,9 +9,10 @@ const VansGrid = () => {
     const fetchVans = async () => {
 
       const cachedVans = localStorage.getItem('vans');
+      let cachedData
       if (cachedVans) {
-        setVans(JSON.parse(cachedVans));
-        return; // Return early if we have cached data
+        cachedData = JSON.parse(cachedVans)
+        setVans(cachedData)
       }
 
       try {
@@ -21,8 +22,11 @@ const VansGrid = () => {
         }
         const data = await res.json();
         setVans(data.vans); 
-        
-        localStorage.setItem('vans', JSON.stringify(data.vans));
+
+        if (!cachedData || JSON.stringify(cachedData) !== JSON.stringify(data.vans)) {
+          setVans(data.vans); // Update state with new data
+          localStorage.setItem(`vans`, JSON.stringify(data.vans)); // Update localStorage
+        }
       } catch (error) {
         console.error("Error fetching vans:", error);
       }
@@ -43,7 +47,7 @@ const VansGrid = () => {
             <img src={van.imageUrl} className="h-full w-full rounded-lg" alt={`Image of ${van.name}`}/>
             <div className="flex items-center w-full text-2xl font-bold">
               <h1>{van.name}</h1>
-              <p className="ml-auto">${van.price}<span className="text-sm text-gray-500">/day</span></p>
+              <p className="ml-auto">₱{van.price}<span className="text-sm text-gray-500">/day</span></p>
             </div>
             <div>
               <button 

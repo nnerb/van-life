@@ -11,11 +11,11 @@ const VanDetail = () => {
 
   useEffect(() => {
     const fetchVans = async () => {
-
       const cachedVan = localStorage.getItem(`van-${params.id}`);
+      let cachedData
       if (cachedVan) {
-        setVan(JSON.parse(cachedVan));
-        return; // Return early if we have cached data
+        cachedData = JSON.parse(cachedVan);
+        setVan(cachedData);
       }
       try {
         const res = await fetch(`/api/vans/${params.id}`);
@@ -23,7 +23,12 @@ const VanDetail = () => {
           throw new Error('Network response was not ok');
         }
         const data = await res.json();
-        setVan(data.vans); 
+
+        // Compare cached data with the fetched data
+        if (!cachedData || JSON.stringify(cachedData) !== JSON.stringify(data.vans)) {
+          setVan(data.vans); // Update state with new data
+          localStorage.setItem(`van-${params.id}`, JSON.stringify(data.vans)); // Update localStorage
+        }
         localStorage.setItem(`van-${params.id}`, JSON.stringify(data.vans));
       } catch (error) {
         console.error("Error fetching vans:", error);
