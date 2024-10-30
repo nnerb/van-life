@@ -11,10 +11,27 @@ const VanDetail = () => {
   const [van, setVan] = useState<Van>()
 
   useEffect(() => {
-    fetch(`/api/vans/${params.id}`)
-    .then(res => res.json())
-    .then(data => setVan(data.vans))
-  }, [params])
+    const fetchVans = async () => {
+
+      const cachedVan = localStorage.getItem(`van-${params.id}`);
+      if (cachedVan) {
+        setVan(JSON.parse(cachedVan));
+        return; // Return early if we have cached data
+      }
+      try {
+        const res = await fetch(`/api/vans/${params.id}`);
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await res.json();
+        setVan(data.vans); 
+        localStorage.setItem(`van-${params.id}`, JSON.stringify(data.vans));
+      } catch (error) {
+        console.error("Error fetching vans:", error);
+      }
+    }
+    fetchVans()
+  }, [params.id])
 
   return ( 
     <VanLayout>
@@ -44,6 +61,8 @@ const VanDetail = () => {
                   <p>${van.price}<span className="text-sm text-gray-500">/day</span></p>
                 </div>
                 <p>{van.description}</p>
+
+                <button className="font-bold text-gray-50 bg-orange-400 py-2 w-full sm:w-60 rounded-md">Rent this van</button>
             </div>
           </div>
         ) : <h2> Loading... </h2>}

@@ -7,6 +7,13 @@ const VansGrid = () => {
 
   useEffect(() => {
     const fetchVans = async () => {
+
+      const cachedVans = localStorage.getItem('vans');
+      if (cachedVans) {
+        setVans(JSON.parse(cachedVans));
+        return; // Return early if we have cached data
+      }
+
       try {
         const res = await fetch("/api/vans");
         if (!res.ok) {
@@ -14,6 +21,8 @@ const VansGrid = () => {
         }
         const data = await res.json();
         setVans(data.vans); 
+        
+        localStorage.setItem('vans', JSON.stringify(data.vans));
       } catch (error) {
         console.error("Error fetching vans:", error);
       }
