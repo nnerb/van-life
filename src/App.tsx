@@ -10,6 +10,11 @@ import "./server"
 import VanDetail from './pages/vans/VanDetail'
 import Layout from './Layout'
 import VanLayout from './pages/vans/VanLayout'
+import Host from './pages/host/Host'
+import Dashboard from './pages/host/pages/Dashboard'
+import Income from './pages/host/pages/Income'
+import HostVans from './pages/host/pages/Vans'
+import Reviews from './pages/host/pages/Reviews'
 
 function App() {
   return (
@@ -17,12 +22,17 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />}/>
+            <Route path="/host" element={<Host />}>
+              <Route path="/host" element={<Dashboard/>}/>
+              <Route path="/host/income" element={<Income/>}/>
+              <Route path="/host/vans" element={<HostVans/>}/>
+              <Route path="/host/reviews" element={<Reviews/>}/>
+            </Route>
           <Route path="/about" element={<About />}/>
           <Route path="/vans" element={<VanLayout />}>
             <Route path="/vans" element={<Vans />}/>
             <Route path="/vans/:id" element={<VanDetail />}/>
           </Route>
-          
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-import VanLayout from "./VanLayout";
 import { useEffect, useState } from "react";
 import { Van } from "../../types/vans";
 
