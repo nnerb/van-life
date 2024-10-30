@@ -10,7 +10,7 @@ const HostNavbar = () => {
   ]
 
   return ( 
-    <div className="flex gap-4">
+    <div className="flex gap-4 py-9 px-8 bg-orange-50">
       {routes.map((route) => (
         <NavLink 
           key={route.id} 

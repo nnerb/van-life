@@ -5,10 +5,10 @@ import { Outlet } from "react-router-dom";
 
 const Layout =  () => {
   return ( 
-    <div className="relative overflow-hidden font-mono">
+    <div className="relative overflow-hidden font-mono bg-orange-50 min-h-screen w-full">
       <Navbar />
       {/* Page content goes here */}
-      <div className="py-[40px] max-w-screen-2xl mx-auto bg-orange-50/20">
+      <div className="py-[40px] max-w-screen-lg mx-auto">
         <Outlet />
       </div>
       <Footer />

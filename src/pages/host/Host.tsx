@@ -3,7 +3,7 @@ import HostNavbar from "./components/HostNavbar";
 
 const Host = () => {
   return ( 
-    <div className="py-24 px-8 max-w-screen-2xl mx-auto">
+    <div className="mt-[76px] pb-11">
       <HostNavbar />
       <Outlet />
     </div>
