@@ -1,17 +1,10 @@
-import { FC } from "react";
-import Layout from "../../Layout";
+import { Outlet } from "react-router-dom";
 
-interface VanLayoutProps {
-  children: React.ReactNode
-}
-
-const VanLayout: FC<VanLayoutProps> = ({ children }) => {
+const VanLayout = () => {
   return ( 
-    <Layout>
-      <div className="py-24 px-8">
-        {children}
-      </div>
-    </Layout>
+    <div className="py-24 px-8">
+      <Outlet />
+    </div>
    );
 }
  

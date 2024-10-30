@@ -1,18 +1,15 @@
-import React from "react";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { Outlet } from "react-router-dom";
 
-interface LayoutProps {
-  children: React.ReactNode
-}
-
-const Layout: React.FC<LayoutProps> =  ({ children } ) => {
+const Layout =  () => {
   return ( 
     <div className="relative overflow-hidden">
       <Navbar />
       {/* Page content goes here */}
       <div className="py-[40px]">
-        {children}
+        <Outlet />
       </div>
       <Footer />
     </div>
