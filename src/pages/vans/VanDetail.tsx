@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Van } from "../../types/vans";
+import { phpFormatter } from "../../utils/formatter";
 
 const VanDetail = () => {
 
@@ -61,7 +62,7 @@ const VanDetail = () => {
               </button>
               <div className="flex flex-col text-2xl font-bold">
                 <h1>{van.name}</h1>
-                <p>${van.price}<span className="text-sm text-gray-500">/day</span></p>
+                <p>{phpFormatter.format(van.price)}<span className="text-sm text-gray-500">/day</span></p>
               </div>
               <p>{van.description}</p>
 

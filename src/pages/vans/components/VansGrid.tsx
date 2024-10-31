@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Van } from "../../../types/vans";
 import { Link } from "react-router-dom";
+import { phpFormatter } from "../../../utils/formatter";
 
 const VansGrid = () => {
   const [vans, setVans] = useState<Van[]>([])
@@ -47,7 +48,7 @@ const VansGrid = () => {
             <img src={van.imageUrl} className="h-full w-full rounded-lg" alt={`Image of ${van.name}`}/>
             <div className="flex items-center w-full text-2xl font-bold">
               <h1>{van.name}</h1>
-              <p className="ml-auto">₱{van.price}<span className="text-sm text-gray-500">/day</span></p>
+              <p className="ml-auto">{phpFormatter.format(van.price)}<span className="text-sm text-gray-500">/day</span></p>
             </div>
             <div>
               <button 

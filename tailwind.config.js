@@ -7,7 +7,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        roboto: ['Roboto', 'sans-serif']
+        "inter-regular": ['Regular'],
+        "inter-medium": ['Medium'],
+        "inter-bold": ['Bold'],
+        "inter-extra-bold": ['Extra-Bold'],
+        "inter-black": ['Black']
       }
     },
   },

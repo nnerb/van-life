@@ -4,6 +4,32 @@
 
 /* src/fonts.css */
 @font-face {
-  font-family: 'Roboto'; 
-  src: url('../src/assets/fonts/Roboto-Regular.ttf') format('woff2');
+  font-family: 'Regular'; 
+  src: local("Inter-Regular"), 
+  url('../src/assets/fonts/Inter_18pt-Regular.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Medium'; 
+  src: local("Inter-Medium"), 
+  url('../src/assets/fonts/Inter_18pt-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bold'; 
+  src: local("Inter-Bold"), 
+  url('../src/assets/fonts/Inter_18pt-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Extra-Bold'; 
+  src: local("Inter-Extra-Bold"), 
+  url('../src/assets/fonts/Inter_18pt-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Black'; 
+  src: local("Inter-Black"), 
+  url('../src/assets/fonts/Inter_18pt-Black.ttf') format('truetype');
+}
+
