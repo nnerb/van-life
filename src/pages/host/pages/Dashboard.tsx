@@ -5,7 +5,7 @@ import HostVansGrid from "../components/HostVansGrid";
 const Dashboard = () => {
   return ( 
     <div className="flex flex-col">
-      <div className="flex flex-col gap-6 px-8 py-9 bg-orange-100 rounded-lg">
+      <div className="flex flex-col gap-6 px-5 py-9 bg-orange-100 rounded-lg">
         <h2 className="text-3xl font-inter-bold">Welcome!</h2>
         <div className="flex w-full items-center">
           <p className="text-gray-600">
