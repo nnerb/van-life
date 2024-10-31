@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { phpFormatter } from "../../../utils/formatter";
-import useVans from "../../../hooks/useVans";
+import { Van } from "../../../types/vans";
 
-const VansGrid = () => {
-  const { vans, error } = useVans(); // Call the hook
+interface VansGridProps {
+  vans: Van[];
+  error: string | null
+}
+
+const VansGrid = ({ vans, error }: VansGridProps) => {
 
   if (vans.length === 0) {
     return <h2>Loading...</h2>;

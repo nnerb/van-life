@@ -20,7 +20,7 @@ const Dashboard = () => {
         <p className="text-lg font-inter-bold">⭐5.0<span className="text-gray-600 font-inter-medium">/5</span></p>
         <Link className="ml-auto font-normal" to="">Details</Link>
       </div>
-      <div className="flex flex-col gap-4 p-8">
+      <div className="flex flex-col gap-4 py-8 px-5">
         <div className="flex items-center gap">
           <h1 className="font-inter-bold text-xl">Your listed vans</h1>
           <Link to="" className="ml-auto">View all</Link>
