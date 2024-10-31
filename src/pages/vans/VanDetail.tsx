@@ -60,7 +60,7 @@ const VanDetail = () => {
               >
                 {van.type}
               </button>
-              <div className="flex flex-col text-2xl font-bold">
+              <div className="flex flex-col text-2xl font-inter-semi-bold">
                 <h1>{van.name}</h1>
                 <p>{phpFormatter.format(van.price)}<span className="text-sm text-gray-500">/day</span></p>
               </div>

@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         "inter-regular": ['Regular'],
         "inter-medium": ['Medium'],
+        "inter-semi-bold": ['Semi-Bold'],
         "inter-bold": ['Bold'],
         "inter-extra-bold": ['Extra-Bold'],
         "inter-black": ['Black']

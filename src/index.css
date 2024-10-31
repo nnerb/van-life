@@ -16,6 +16,12 @@
 }
 
 @font-face {
+  font-family: 'Semi-Bold'; 
+  src: local("Inter-Semi-Bold"), 
+  url('../src/assets/fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'Bold'; 
   src: local("Inter-Bold"), 
   url('../src/assets/fonts/Inter_18pt-Bold.ttf') format('truetype');

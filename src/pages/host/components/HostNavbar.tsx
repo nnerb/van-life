@@ -17,7 +17,7 @@ const HostNavbar = () => {
           to={route.path} 
           className={({ isActive}) => 
             isActive ? 
-            'font-bold underline text-[18px]' : 
+            'font-inter-bold underline text-[18px]' : 
             'text-[18px] text-gray-500'
           } 
             end
