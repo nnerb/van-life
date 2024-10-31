@@ -10,15 +10,15 @@ const HostNavbar = () => {
   ]
 
   return ( 
-    <div className="flex gap-4 py-9 px-8 bg-orange-50">
+    <div className="flex gap-4 py-9 px-8 text-xs md:text-[18px] bg-orange-50">
       {routes.map((route) => (
         <NavLink 
           key={route.id} 
           to={route.path} 
           className={({ isActive}) => 
             isActive ? 
-            'font-inter-bold underline text-[18px]' : 
-            'text-[18px] text-gray-500'
+            'font-inter-bold underline ' : 
+            'text-gray-500'
           } 
             end
         >
