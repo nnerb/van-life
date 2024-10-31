@@ -6,7 +6,6 @@ import { phpFormatter } from "../../utils/formatter";
 const VanDetail = () => {
 
   const params = useParams()
-  console.log(params)
 
   const [van, setVan] = useState<Van>()
 

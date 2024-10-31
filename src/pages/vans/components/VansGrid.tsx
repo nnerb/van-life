@@ -1,54 +1,31 @@
-import { useEffect, useState } from "react";
-import { Van } from "../../../types/vans";
 import { Link } from "react-router-dom";
 import { phpFormatter } from "../../../utils/formatter";
+import useVans from "../../../hooks/useVans";
 
 const VansGrid = () => {
-  const [vans, setVans] = useState<Van[]>([])
-
-  useEffect(() => {
-    const fetchVans = async () => {
-
-      const cachedVans = localStorage.getItem('vans');
-      let cachedData
-      if (cachedVans) {
-        cachedData = JSON.parse(cachedVans)
-        setVans(cachedData)
-      }
-
-      try {
-        const res = await fetch("/api/vans");
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await res.json();
-        setVans(data.vans); 
-
-        if (!cachedData || JSON.stringify(cachedData) !== JSON.stringify(data.vans)) {
-          setVans(data.vans); // Update state with new data
-          localStorage.setItem(`vans`, JSON.stringify(data.vans)); // Update localStorage
-        }
-      } catch (error) {
-        console.error("Error fetching vans:", error);
-      }
-    }
-    fetchVans()
-  }, [])
+  const { vans, error } = useVans(); // Call the hook
 
   if (vans.length === 0) {
-    return <h2>Loading...</h2>
+    return <h2>Loading...</h2>;
+  }
+
+  if (error) {
+    return <h2>Error: {error}</h2>;
   }
 
   return ( 
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-8">
       {vans.map((van) => (
         <Link key={van.id} to={`/vans/${van.id}`} aria-label={`View details for ${van.name}, 
           priced at $${van.price} per day`}>
           <div className="mt-10 flex flex-col gap-2">
             <img src={van.imageUrl} className="h-full w-full rounded-lg" alt={`Image of ${van.name}`}/>
-            <div className="flex items-center w-full text-2xl font-bold">
+            <div className="flex items-center w-full text-xl font-inter-semi-bold">
               <h1>{van.name}</h1>
-              <p className="ml-auto">{phpFormatter.format(van.price)}<span className="text-sm text-gray-500">/day</span></p>
+              <p className="ml-auto">
+                {phpFormatter.format(van.price)}
+                <span className="text-sm text-gray-500">/day</span>
+              </p>
             </div>
             <div>
               <button 

@@ -4,6 +4,6 @@ export interface Van {
   price: number;
   description: string;
   imageUrl: string;
-  type: string;
+  type: "Simple" | "Rugged" | "Luxury";
 
 }
