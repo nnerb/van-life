@@ -5,7 +5,7 @@ const Vans = () => {
   return (
     <>
       <h1 className="text-3xl font-bold mb-5">Explore our van options</h1>
-      <div className="flex gap-4 items-center text-gray-600">
+      <div className="flex gap-2 md:gap-4 items-center text-gray-600 text-xs md:text-base flex-wrap">
         <button className="bg-orange-100/90 py-2 px-4 rounded-md">Simple</button>
         <button className="bg-orange-100/90 py-2 px-4 rounded-md">Luxury</button>
         <button className="bg-orange-100/90 py-2 px-4 rounded-md">Rugged</button>
