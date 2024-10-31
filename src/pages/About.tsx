@@ -10,7 +10,7 @@ const About = () => {
           className="w-full object-center" 
         />
       </div>
-      <div className="flex flex-col gap-8 px-8">
+      <div className="flex flex-col gap-8 px-5">
         <h1 className="text-4xl font-bold">
           Dont squeeze in a sedan when you could relax in a van.
         </h1>

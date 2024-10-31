@@ -15,7 +15,7 @@ const Dashboard = () => {
         </div>  
         <h3 className="text-4xl font-inter-extra-bold">{phpFormatter.format(4999)}</h3>
       </div>
-      <div className="px-8 py-11 bg-orange-200 flex items-center gap-1 rounded-lg">
+      <div className="px-5 py-11 bg-orange-200 flex items-center gap-1 rounded-lg">
         <h1 className="text-xl font-inter-bold">Review score</h1>
         <p className="text-lg font-inter-bold">⭐5.0<span className="text-gray-600 font-inter-medium">/5</span></p>
         <Link className="ml-auto font-normal" to="">Details</Link>
