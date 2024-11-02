@@ -16,7 +16,6 @@ const HostVansGrid = () => {
 
   return ( 
     <div className="flex flex-col gap-3">
-      <h1 className="text-[32px] font-inter-bold">Your listed vans</h1>
       {vans.map((van) => (
         <Link
           to={`/host/vans/${van.id}`}
