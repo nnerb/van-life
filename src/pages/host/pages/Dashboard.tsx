@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { phpFormatter } from "../../../utils/formatter";
-import HostVansGrid from "../components/HostVansGrid";
+import HostDashboardGrid from "../components/HostDashboardGrid";
 
 const Dashboard = () => {
   return ( 
     <div className="flex flex-col">
       <div className="flex flex-col gap-6 px-5 py-9 bg-orange-100 rounded-lg">
-        <h2 className="text-3xl font-inter-bold">Welcome!</h2>
+        <h2 className="text-4xl font-inter-bold">Welcome!</h2>
         <div className="flex w-full items-center">
           <p className="text-gray-600">
             Income last <span className="text-gray-600 underline font-inter-bold">30 days</span>
@@ -25,7 +25,7 @@ const Dashboard = () => {
           <h1 className="font-inter-bold text-xl">Your listed vans</h1>
           <Link to="" className="ml-auto">View all</Link>
         </div>
-        <HostVansGrid />
+        <HostDashboardGrid />
       </div>
     </div>
    );

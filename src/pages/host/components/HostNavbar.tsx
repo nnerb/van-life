@@ -20,7 +20,7 @@ const HostNavbar = () => {
             'font-inter-bold underline ' : 
             'text-gray-500'
           } 
-            end
+            end={route.name === "Dashboard" ? true : false}
         >
           {route.name}
         </NavLink>

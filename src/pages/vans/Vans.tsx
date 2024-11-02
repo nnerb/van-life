@@ -11,10 +11,9 @@ const filterTypes = [
 
 const Vans = () => {
 
-  const { vans, error } = useVans()
+  const { vans, error } = useVans("/api/vans")
 
   const [activeFilters, setActiveFilters] = useState<string[]>([])
-  console.log(activeFilters)
 
   const toggleFilter = (type: string) => {
     setActiveFilters((prevActiveFilter) =>
@@ -31,7 +30,7 @@ const Vans = () => {
     <>
       <h1 className="text-2xl sm:text-3xl font-bold mb-5">Explore our van options</h1>
       <div className="flex gap-2 sm:gap-4 items-center text-xs sm:text-base flex-wrap">
-        {filterTypes.map((filterType) => (
+        {filterTypes?.map((filterType) => (
           <button 
             key={filterType.id} 
             className={`py-2 px-4 rounded-md text-gray-600

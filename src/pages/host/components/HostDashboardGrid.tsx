@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import useVans from "../../../hooks/useVans";
 import { phpFormatter } from "../../../utils/formatter";
 
-const HostVansGrid = () => {
+const HostDashboardGrid = () => {
 
-  const { vans, error } = useVans("/api/host/vans")
+  const { vans, error } = useVans("/api/host/vans") 
 
   if (vans.length === 0) {
     return <p>Loading...</p>
@@ -16,22 +16,21 @@ const HostVansGrid = () => {
 
   return ( 
     <div className="flex flex-col gap-3">
-      <h1 className="text-[32px] font-inter-bold">Your listed vans</h1>
       {vans.map((van) => (
-        <Link
-          to={`/host/vans/${van.id}`}
+        <div 
           key={van.id}
-          className="bg-white py-4 px-5 w-full flex items-center gap-3 cursor-pointer rounded-md shadow-sm"
+          className="bg-white py-4 px-5 w-full flex items-center gap-3 rounded-md shadow-sm"
         > 
           <img src={van.imageUrl} className="h-16 w-16 rounded-md"/>
           <div className="flex flex-col gap-1">
             <h1 className="font-inter-semi-bold text-xl">{van.name}</h1>
             <p className="text-gray-500">{phpFormatter.format(van.price)}<span className="">/day</span></p>
           </div>
-        </Link>
+          <Link to="" className="ml-auto">Edit</Link>
+        </div>
       ))}
     </div>
    );
 }
  
-export default HostVansGrid;
+export default HostDashboardGrid;
