@@ -15,7 +15,7 @@ import Dashboard from './pages/host/pages/Dashboard'
 import Income from './pages/host/pages/Income'
 import HostVans from './pages/host/pages/Vans'
 import Reviews from './pages/host/pages/Reviews'
-import HostVanDetails from './pages/host/components/HostVansDetail'
+import HostVanDetails from './pages/host/components/HostVanDetail'
 
 function App() {
   return (

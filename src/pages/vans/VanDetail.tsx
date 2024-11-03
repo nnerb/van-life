@@ -49,8 +49,8 @@ const VanDetail = () => {
         <div className="flex gap-10 flex-col sm:flex-row">
           <img src={van.imageUrl} className="rounded-lg h-auto sm:h-96"/>
           <div className="flex flex-col gap-5 items-start">
-            <button 
-              className={`
+              <p 
+                className={`
                   text-orange-50 px-3 py-1 rounded-md
                   ${van.type === "Simple" && "bg-red-500"}
                   ${van.type === "Rugged" && "bg-green-900"}
@@ -58,7 +58,7 @@ const VanDetail = () => {
                 `}
               >
                 {van.type}
-              </button>
+              </p>
               <div className="flex flex-col text-2xl font-inter-semi-bold">
                 <h1>{van.name}</h1>
                 <p>{phpFormatter.format(van.price)}<span className="text-sm text-gray-500">/day</span></p>
