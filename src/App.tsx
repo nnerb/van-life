@@ -7,15 +7,20 @@ import About from './pages/About'
 import Vans from './pages/vans/Vans'
 // MirageJS
 import "./server"
+
+
 import VanDetail from './pages/vans/VanDetail'
 import Layout from './Layout'
 import VanLayout from './pages/vans/VanLayout'
 import Host from './pages/host/Host'
 import Dashboard from './pages/host/pages/Dashboard'
 import Income from './pages/host/pages/Income'
-import HostVans from './pages/host/pages/Vans'
+import HostVans from './pages/host/pages/vans/Vans'
 import Reviews from './pages/host/pages/Reviews'
-import HostVanDetails from './pages/host/components/HostVanDetail'
+import HostVanDetail from './pages/host/pages/vans/components/HostVanDetail'
+import HostVanDetails from './pages/host/pages/vans/components/HostVanDetails'
+import HostVanPricing from './pages/host/pages/vans/components/HostVanPricing'
+import HostVanPhotos from './pages/host/pages/vans/components/HostVanPhotos'
 
 function App() {
   return (
@@ -27,7 +32,11 @@ function App() {
               <Route index element={<Dashboard/>}/>
               <Route path="income" element={<Income/>}/>
               <Route path="vans" element={<HostVans/>}/>
-              <Route path="vans/:id" element={<HostVanDetails/>}/>
+              <Route path="vans/:id" element={<HostVanDetail/>}>
+                <Route index element={<HostVanDetails/>}/>
+                <Route path="pricing" element={<HostVanPricing/>} />
+                <Route path="photos" element={<HostVanPhotos/>}/>
+              </Route>
               <Route path="reviews" element={<Reviews/>}/>
             </Route>
           <Route path="about" element={<About />}/>

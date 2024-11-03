@@ -61,11 +61,17 @@ const VanDetail = () => {
               </p>
               <div className="flex flex-col text-2xl font-inter-semi-bold">
                 <h1>{van.name}</h1>
-                <p>{phpFormatter.format(van.price)}<span className="text-sm text-gray-500">/day</span></p>
+                <p>{phpFormatter.format(van.price)}
+                  <span className="text-sm text-gray-500">/day</span>
+                </p>
               </div>
               <p>{van.description}</p>
 
-              <button className="font-bold text-gray-50 bg-orange-400 py-2 w-full sm:w-60 rounded-md">Rent this van</button>
+              <button 
+                className="font-bold text-gray-50 bg-orange-400 py-2 w-full sm:max-w-60 rounded-md"
+              >
+                Rent this van
+              </button>
           </div>
         </div>
       ) : <h2> Loading... </h2>}

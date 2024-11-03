@@ -1,4 +1,5 @@
-import HostVansGrid from "../components/HostVansGrid";
+import HostVansGrid from "./components/HostVansGrid";
+
 
 const HostVans = () => {
   return ( 

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import useVans from "../../../hooks/useVans";
-import { phpFormatter } from "../../../utils/formatter";
+import useVans from "../../../../../hooks/useVans";
+import { phpFormatter } from "../../../../../utils/formatter";
+
 
 const HostVansGrid = () => {
 
