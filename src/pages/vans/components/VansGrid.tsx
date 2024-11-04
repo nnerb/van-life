@@ -5,12 +5,11 @@ import { Van } from "../../../types/vans";
 interface VansGridProps {
   vans: Van[];
   error: string | null;
-  searchParams: {
-    size: number
-  }
+  searchParams: URLSearchParams,
+  activeFilters: string[]
 }
 
-const VansGrid = ({ vans, error, searchParams }: VansGridProps) => {
+const VansGrid = ({ vans, error, searchParams, activeFilters }: VansGridProps) => {
 
   if (vans.length === 0) {
     return <h2>Loading...</h2>;
@@ -28,7 +27,7 @@ const VansGrid = ({ vans, error, searchParams }: VansGridProps) => {
           to={van.id} 
           aria-label={`View details for ${van.name}, 
           priced at $${van.price} per day`}
-          state={{ search: `?${searchParams.toString()}` }}
+          state={{ search: `?${searchParams.toString()}`, type: activeFilters }}
         >
           <div className="mt-10 flex flex-col gap-2">
             <img src={van.imageUrl} className="h-full w-full rounded-lg" alt={`Image of ${van.name}`}/>

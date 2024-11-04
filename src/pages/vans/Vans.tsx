@@ -4,6 +4,7 @@ import useVans from "../../hooks/useVans";
 import VansGrid from "./components/VansGrid";
 import { useSearchParams } from "react-router-dom";
 
+
 const filterTypes = [
   { id: 1, name: 'Simple', color: "bg-red-500" },
   { id: 2, name: 'Luxury', color: "bg-slate-950"},
@@ -69,7 +70,13 @@ const Vans = () => {
         ))}
         {activeFilters.length > 0 && <a onClick={clearFilters} className="underline cursor-pointer">Clear filters</a>}
       </div>
-      <VansGrid vans={filteredVans} error={error} searchParams={searchParams} />
+      <VansGrid 
+        vans={filteredVans} 
+        error={error} 
+        searchParams={searchParams} 
+        activeFilters={activeFilters}
+
+      />
     </>
    );
 }

@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { Van } from "../../types/vans";
 import { phpFormatter } from "../../utils/formatter";
 
-interface StateProps {
-  search: string
+interface LocationState {
+  search: string;
+  type: string[];
 }
 
 const VanDetail = () => {
@@ -12,9 +13,7 @@ const VanDetail = () => {
   const params = useParams()
   const [van, setVan] = useState<Van>()
   const location = useLocation()
-
-  console.log(location)
-
+  
   useEffect(() => {
     const fetchVans = async () => {
       const cachedVan = localStorage.getItem(`van-${params.id}`);
@@ -44,7 +43,15 @@ const VanDetail = () => {
   }, [params.id])
 
 
-  const backToVanUrl = (location.state as StateProps).search || '';
+  const state = location.state as LocationState
+  const backToVanUrl = state.search || '';
+  const types = state.type || []
+
+  const getTypesText = (types: string[]) => {
+    if (types.length === 1) return types[0];
+    if (types.length === 2) return `${types[0]} and ${types[1]}`;
+    return 'all'
+  };
 
   return ( 
     <div>
@@ -53,7 +60,7 @@ const VanDetail = () => {
         <Link 
           to={`..${backToVanUrl}`}
         >
-          Back to all vans
+          Back to {getTypesText(types)} vans
         </Link>
       </span>
       {van ? (
