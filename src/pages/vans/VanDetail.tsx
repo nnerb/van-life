@@ -1,13 +1,19 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Van } from "../../types/vans";
 import { phpFormatter } from "../../utils/formatter";
 
+interface StateProps {
+  search: string
+}
+
 const VanDetail = () => {
 
   const params = useParams()
-
   const [van, setVan] = useState<Van>()
+  const location = useLocation()
+
+  console.log(location)
 
   useEffect(() => {
     const fetchVans = async () => {
@@ -37,11 +43,16 @@ const VanDetail = () => {
     fetchVans()
   }, [params.id])
 
+
+  const backToVanUrl = (location.state as StateProps).search || '';
+
   return ( 
     <div>
       <span>←</span>
       <span className="ml-1 underline text-sm text-gray-600">
-        <Link to="..">
+        <Link 
+          to={`..${backToVanUrl}`}
+        >
           Back to all vans
         </Link>
       </span>

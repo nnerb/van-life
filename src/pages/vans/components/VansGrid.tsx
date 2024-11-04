@@ -4,10 +4,13 @@ import { Van } from "../../../types/vans";
 
 interface VansGridProps {
   vans: Van[];
-  error: string | null
+  error: string | null;
+  searchParams: {
+    size: number
+  }
 }
 
-const VansGrid = ({ vans, error }: VansGridProps) => {
+const VansGrid = ({ vans, error, searchParams }: VansGridProps) => {
 
   if (vans.length === 0) {
     return <h2>Loading...</h2>;
@@ -20,8 +23,13 @@ const VansGrid = ({ vans, error }: VansGridProps) => {
   return ( 
     <div className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-8">
       {vans.map((van) => (
-        <Link key={van.id} to={`/vans/${van.id}`} aria-label={`View details for ${van.name}, 
-          priced at $${van.price} per day`}>
+        <Link 
+          key={van.id} 
+          to={van.id} 
+          aria-label={`View details for ${van.name}, 
+          priced at $${van.price} per day`}
+          state={{ search: `?${searchParams.toString()}` }}
+        >
           <div className="mt-10 flex flex-col gap-2">
             <img src={van.imageUrl} className="h-full w-full rounded-lg" alt={`Image of ${van.name}`}/>
             <div className="flex items-center w-full text-xl font-inter-semi-bold">

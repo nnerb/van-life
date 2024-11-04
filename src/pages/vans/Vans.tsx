@@ -18,14 +18,17 @@ const Vans = () => {
 
   useEffect(() => {
     const typeParam = searchParams.get('type');
-    console.log(typeParam)
     if (typeParam) {
       setActiveFilters(typeParam.split(',').map(type => type.toLowerCase()));
     }
   }, [searchParams]);
 
   useEffect(() => {
-    setSearchParams({ type: activeFilters.join(',') });
+    if (activeFilters.length > 0) {
+      setSearchParams({ type: activeFilters.join(',') });
+    } else {
+      setSearchParams({});
+    }
   }, [activeFilters, setSearchParams]);
 
 
@@ -66,7 +69,7 @@ const Vans = () => {
         ))}
         {activeFilters.length > 0 && <a onClick={clearFilters} className="underline cursor-pointer">Clear filters</a>}
       </div>
-      <VansGrid vans={filteredVans} error={error}/>
+      <VansGrid vans={filteredVans} error={error} searchParams={searchParams} />
     </>
    );
 }
