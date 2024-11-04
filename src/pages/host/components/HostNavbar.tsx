@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 const HostNavbar = () => {
 
   const routes = [
-    { id: 1, path: '/host', name: 'Dashboard' },
-    { id: 2, path: '/host/income', name: 'Income' },
-    { id: 3, path: '/host/vans', name: 'Vans' },
-    { id: 4, path: '/host/reviews', name: 'Reviews'}
+    { id: 1, path: '.', name: 'Dashboard' },
+    { id: 2, path: 'income', name: 'Income' },
+    { id: 3, path: 'vans', name: 'Vans' },
+    { id: 4, path: 'reviews', name: 'Reviews'}
   ]
 
   return ( 

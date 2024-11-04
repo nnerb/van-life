@@ -23,7 +23,10 @@ const HostVanDetail = () => {
       <div>
         <span>←</span>
         <span className="ml-1 underline text-sm text-gray-600">
-          <Link to="/host/vans">
+          <Link 
+            to=".."
+            relative="path"
+          >
             Back to all vans
           </Link>
         </span>

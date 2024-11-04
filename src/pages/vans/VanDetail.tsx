@@ -41,7 +41,7 @@ const VanDetail = () => {
     <div>
       <span>←</span>
       <span className="ml-1 underline text-sm text-gray-600">
-        <Link to="/vans">
+        <Link to="..">
           Back to all vans
         </Link>
       </span>

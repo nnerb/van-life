@@ -1,13 +1,11 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const HostVanDetailNavbar = () => {
 
-  const { id } = useParams()
-
   const routes = [
-    { id: 1, path: `/host/vans/${id}`, name: 'Details' },
-    { id: 2, path: `/host/vans/${id}/pricing`, name: 'Pricing' },
-    { id: 3, path: `/host/vans/${id}/photos`, name: 'Photos' }
+    { id: 1, path: '.', name: 'Details' },
+    { id: 2, path: 'pricing', name: 'Pricing' },
+    { id: 3, path: 'photos', name: 'Photos' }
   ]
 
 

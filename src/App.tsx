@@ -17,10 +17,10 @@ import Dashboard from './pages/host/pages/Dashboard'
 import Income from './pages/host/pages/Income'
 import HostVans from './pages/host/pages/vans/Vans'
 import Reviews from './pages/host/pages/Reviews'
-import HostVanDetail from './pages/host/pages/vans/components/HostVanDetail'
-import HostVanDetails from './pages/host/pages/vans/components/HostVanDetails'
-import HostVanPricing from './pages/host/pages/vans/components/HostVanPricing'
-import HostVanPhotos from './pages/host/pages/vans/components/HostVanPhotos'
+import HostVanDetail from './pages/host/pages/vans/van/HostVanDetail'
+import HostVanPricing from './pages/host/pages/vans/van/HostVanPricing'
+import HostVanPhotos from './pages/host/pages/vans/van/HostVanPhotos'
+import HostVanInfo from './pages/host/pages/vans/van/HostVanInfo'
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
               <Route path="income" element={<Income/>}/>
               <Route path="vans" element={<HostVans/>}/>
               <Route path="vans/:id" element={<HostVanDetail/>}>
-                <Route index element={<HostVanDetails/>}/>
+                <Route index element={<HostVanInfo/>}/>
                 <Route path="pricing" element={<HostVanPricing/>} />
                 <Route path="photos" element={<HostVanPhotos/>}/>
               </Route>

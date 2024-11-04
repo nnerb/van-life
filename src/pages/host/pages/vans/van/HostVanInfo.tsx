@@ -7,7 +7,7 @@ interface DetailsProps {
   data: string;
 }
 
-const HostVanDetails = () => {
+const HostVanInfo = () => {
 
   const { van } = useOutletContext<{van: Van}>()
 
@@ -32,4 +32,4 @@ const HostVanDetails = () => {
    );
 }
  
-export default HostVanDetails;
+export default HostVanInfo;
