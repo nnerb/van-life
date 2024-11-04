@@ -21,6 +21,7 @@ import HostVanDetail from './pages/host/pages/vans/van/HostVanDetail'
 import HostVanPricing from './pages/host/pages/vans/van/HostVanPricing'
 import HostVanPhotos from './pages/host/pages/vans/van/HostVanPhotos'
 import HostVanInfo from './pages/host/pages/vans/van/HostVanInfo'
+import NotFoundPage from './components/NotFound'
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route index element={<Vans />}/>
             <Route path=":id" element={<VanDetail />}/>
           </Route>
+          <Route path="*" element={<NotFoundPage />}/>
         </Route>
       </Routes>
     </BrowserRouter>
