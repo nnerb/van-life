@@ -4,14 +4,18 @@ import { phpFormatter } from "../../../utils/formatter";
 
 const HostDashboardGrid = () => {
 
-  const { vans, error } = useVans("/api/host/vans") 
+  const { vans, error, loading } = useVans("/api/host/vans") 
 
-  if (vans.length === 0) {
-    return <p>Loading...</p>
+  if (loading) {
+    return <h1>Loading...</h1>
   }
 
   if (error) {
-    return <h2>Error: {error}</h2>
+    return <h2>Something went wrong while fetching data. Please try again later.</h2>
+  }
+
+  if (!vans) {
+    return <p>No vans available.</p>
   }
 
   return ( 

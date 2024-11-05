@@ -1,7 +1,8 @@
 import { Link, useLocation, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Van } from "../../types/vans";
 import { phpFormatter } from "../../utils/formatter";
+import useVan from "../../hooks/useVan";
+import useVans from "../../hooks/useVans";
+import NotFoundPage from "../../components/NotFound";
 
 interface LocationState {
   search: string;
@@ -9,43 +10,35 @@ interface LocationState {
 }
 
 const VanDetail = () => {
-
-  const params = useParams()
-  const [van, setVan] = useState<Van>()
+  const { id } = useParams()
   const location = useLocation()
-  
-  useEffect(() => {
-    const fetchVans = async () => {
-      const cachedVan = localStorage.getItem(`van-${params.id}`);
-      let cachedData
-      if (cachedVan) {
-        cachedData = JSON.parse(cachedVan);
-        setVan(cachedData);
-      }
-      try {
-        const res = await fetch(`/api/vans/${params.id}`);
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await res.json();
-
-        // Compare cached data with the fetched data
-        if (!cachedData || JSON.stringify(cachedData) !== JSON.stringify(data.vans)) {
-          setVan(data.vans); // Update state with new data
-          localStorage.setItem(`van-${params.id}`, JSON.stringify(data.vans)); // Update localStorage
-        }
-        localStorage.setItem(`van-${params.id}`, JSON.stringify(data.vans));
-      } catch (error) {
-        console.error("Error fetching vans:", error);
-      }
-    }
-    fetchVans()
-  }, [params.id])
-
-
   const state = location.state as LocationState
   const backToVanUrl = state.search || '';
   const types = state.type || []
+
+  const { vans, error: vansError, loading: vansLoading } = useVans('/api/vans')
+  const { van, error, loading } = useVan(`/api/vans/${id}`)
+
+ 
+  if (loading || vansLoading ) {
+    return <h1>Loading...</h1>
+  }
+
+  if (error || vansError) {
+    const errorMessage = error || vansError
+    console.log('Error: ', errorMessage)
+    return <h1>Something went wrong</h1>
+  }
+
+  if (!van) {
+    return <h1>Van not found</h1>
+  }
+
+  const findVanIndex = vans.findIndex((van) => van.id === id)
+
+  if (findVanIndex === -1) {
+    return <NotFoundPage />
+  }
 
   const getTypesText = (types: string[]) => {
     if (types.length === 1) return types[0];
@@ -63,7 +56,6 @@ const VanDetail = () => {
           Back to {getTypesText(types)} vans
         </Link>
       </span>
-      {van ? (
         <div className="flex gap-10 flex-col sm:flex-row">
           <img src={van.imageUrl} className="rounded-lg h-auto sm:h-96"/>
           <div className="flex flex-col gap-5 items-start">
@@ -92,7 +84,6 @@ const VanDetail = () => {
               </button>
           </div>
         </div>
-      ) : <h2> Loading... </h2>}
     </div>
    );
 }
