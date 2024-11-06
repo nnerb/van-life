@@ -1,6 +1,6 @@
 import { fetchVans } from '../utils/fetchVans';
 
-export function loader() {
+export function hostVansLoader() {
   const vans = fetchVans("/api/host/vans");
   return vans;
 }

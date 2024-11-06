@@ -1,23 +1,10 @@
-import { Link, Outlet, useParams } from "react-router-dom";
-import useVans from "../../../../../hooks/useVans";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
 import { phpFormatter } from "../../../../../utils/formatter";
 import HostVanDetailNavbar from "./HostVanDetailNavbar";
+import { Van } from "../../../../../types/vans";
 
 const HostVanDetail = () => {
-  const { id } = useParams()
-
-
-  const { vans, error } = useVans(`/api/host/vans/${id}`)
-  const van = vans[0]
-
-  if (vans.length === 0) {
-    return <p>Loading...</p>
-  } 
-
-  if (error) {
-    return <h2>Error: {error}</h2>
-  }
-
+  const van = useLoaderData() as Van
   return ( 
     <div className="px-5 flex flex-col">
       <div>
@@ -55,7 +42,7 @@ const HostVanDetail = () => {
             </div>
           </div>
           <div className="">
-            <HostVanDetailNavbar />
+            <HostVanDetailNavbar  />
             <Outlet context={{ van }} />
           </div>
         </div>

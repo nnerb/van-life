@@ -1,38 +1,25 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLoaderData, useLocation, useParams} from "react-router-dom";
 import { phpFormatter } from "../../utils/formatter";
-import useVan from "../../hooks/useVan";
-import useVans from "../../hooks/useVans";
 import NotFoundPage from "../../components/NotFound";
-
+import { Van } from "../../types/vans";
 interface LocationState {
   search: string;
   type: string[];
 }
 
+interface LoaderData {
+  van: Van
+  vans: Van[]
+}
+
 const VanDetail = () => {
   const { id } = useParams()
   const location = useLocation()
-  const state = location.state as LocationState
-  const backToVanUrl = state.search || '';
-  const types = state.type || []
+  const state = location?.state as LocationState
+  const backToVanUrl = state?.search || '';
+  const types = state?.type || []
 
-  const { vans, error: vansError, loading: vansLoading } = useVans('/api/vans')
-  const { van, error, loading } = useVan(`/api/vans/${id}`)
-
- 
-  if (loading || vansLoading ) {
-    return <h1>Loading...</h1>
-  }
-
-  if (error || vansError) {
-    const errorMessage = error || vansError
-    console.log('Error: ', errorMessage)
-    return <h1>Something went wrong</h1>
-  }
-
-  if (!van) {
-    return <h1>Van not found</h1>
-  }
+  const { van, vans } = useLoaderData() as LoaderData;
 
   const findVanIndex = vans.findIndex((van) => van.id === id)
 
@@ -57,7 +44,12 @@ const VanDetail = () => {
         </Link>
       </span>
         <div className="flex gap-10 flex-col sm:flex-row">
-          <img src={van.imageUrl} className="rounded-lg h-auto sm:h-96"/>
+          <img 
+            src={van.imageUrl} 
+            className="rounded-lg h-auto sm:h-96"            
+            alt={van.name || "Van image"}
+            loading="lazy"
+          />
           <div className="flex flex-col gap-5 items-start">
               <p 
                 className={`
