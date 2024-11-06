@@ -1,7 +1,7 @@
 import { useRouteError } from "react-router-dom";
-import { FetchError } from "../../../types/vans";
+import { FetchError } from "../types/vans";
 
-const Error = () => {
+const VansError = () => {
   const error = useRouteError() as FetchError
 
   console.log('[API/HOST/VANS]: ', error)
@@ -14,4 +14,4 @@ const Error = () => {
    );
 }
  
-export default Error;
+export default VansError;

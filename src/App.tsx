@@ -27,16 +27,16 @@ import HostVanPricing from './pages/host/pages/vans/van/HostVanPricing'
 import HostVanPhotos from './pages/host/pages/vans/van/HostVanPhotos'
 import HostVanInfo from './pages/host/pages/vans/van/HostVanInfo'
 import NotFoundPage from './components/NotFound'
-import { loader as hostVansLoader } from './pages/host/pages/vans/loaders/hostVansLoader'
-import Error from './pages/host/components/Error'
+import VansError from './components/VansError'
+import { loader as hostVansLoader } from './loaders/hostVansLoader'
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout />}>
     <Route index element={<Home />}/>
       <Route path="host" element={<Host />}>
-        <Route index element={<Dashboard/>} loader={hostVansLoader} errorElement={<Error/>}/>
+        <Route index element={<Dashboard/>} loader={hostVansLoader} errorElement={<VansError/>}/>
         <Route path="income" element={<Income/>}/>
-        <Route path="vans" element={<HostVans/>} loader={hostVansLoader} errorElement={<Error/>}/>
+        <Route path="vans" element={<HostVans/>} loader={hostVansLoader} errorElement={<VansError/>}/>
         <Route path="vans/:id" element={<HostVanDetail/>} >
           <Route index element={<HostVanInfo/>}/>
           <Route path="pricing" element={<HostVanPricing/>} />
