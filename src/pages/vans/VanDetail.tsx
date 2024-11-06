@@ -1,32 +1,18 @@
-import { Link, useLoaderData, useLocation, useParams} from "react-router-dom";
+import { Link, useLoaderData, useLocation } from "react-router-dom";
 import { phpFormatter } from "../../utils/formatter";
-import NotFoundPage from "../../components/NotFound";
 import { Van } from "../../types/vans";
 interface LocationState {
   search: string;
   type: string[];
 }
 
-interface LoaderData {
-  van: Van
-  vans: Van[]
-}
-
 const VanDetail = () => {
-  const { id } = useParams()
   const location = useLocation()
   const state = location?.state as LocationState
   const backToVanUrl = state?.search || '';
   const types = state?.type || []
 
-  const { van, vans } = useLoaderData() as LoaderData;
-
-  const findVanIndex = vans.findIndex((van) => van.id === id)
-
-  if (findVanIndex === -1) {
-    return <NotFoundPage />
-  }
-
+  const van = useLoaderData() as Van;
   const getTypesText = (types: string[]) => {
     if (types.length === 1) return types[0];
     if (types.length === 2) return `${types[0]} and ${types[1]}`;

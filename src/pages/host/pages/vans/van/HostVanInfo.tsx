@@ -9,12 +9,12 @@ interface DetailsProps {
 
 const HostVanInfo = () => {
 
-  const { van } = useOutletContext<{van: Van}>()
+  const { hostVan } = useOutletContext<{hostVan: Van}>()
 
   const details: DetailsProps[] = [
-    { id: 1, title: 'Name', data: van.name },
-    { id: 2, title: 'Category', data: van.type },
-    { id: 3, title: 'Description', data: van.description },
+    { id: 1, title: 'Name', data: hostVan.name },
+    { id: 2, title: 'Category', data: hostVan.type },
+    { id: 3, title: 'Description', data: hostVan.description },
     { id: 4, title: 'Visibility', data: 'Public' },
   ]
 

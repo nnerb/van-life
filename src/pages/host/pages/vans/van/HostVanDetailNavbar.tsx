@@ -8,7 +8,6 @@ const HostVanDetailNavbar = () => {
     { id: 3, path: 'photos', name: 'Photos' }
   ]
 
-
   return ( 
     <div className="flex gap-6 mb-5">
       {routes.map((route) => (

@@ -5,11 +5,11 @@ import { Van } from "../../../../types/vans";
 
 const HostVans = () => {
 
-  const vans = useLoaderData() as Van[]
+  const hostVans = useLoaderData() as Van[]
   return ( 
     <div className="flex flex-col gap-8 px-5">
       <h1 className="text-[32px] font-inter-bold">Your listed vans</h1>
-      <HostVansGrid vans={vans}/>
+      <HostVansGrid hostVans={hostVans}/>
     </div>
    );
 }
