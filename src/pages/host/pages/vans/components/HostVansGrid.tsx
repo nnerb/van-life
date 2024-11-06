@@ -4,41 +4,14 @@ import { phpFormatter } from "../../../../../utils/formatter";
 import { Van } from "../../../../../types/vans";
 
 interface HostVansGridProps {
-  data: Van[]
+  vans: Van[]
 }
 
-const HostVansGrid = ({ data } : HostVansGridProps) => {
-
-  // const { vans, error, loading } = useVans("/api/host/vans")
-
-  // console.log(data)
-
-  // if (loading) {
-  //   return <p>Loading...</p>
-  // }
-
-  // if (error) {
-  //   return (
-  //     <div className="text-gray-500">
-  //       <span>← </span>
-  //       <Link className="underline "to="..">
-  //         Back to dashboard
-  //       </Link>
-  //       <p className="text-lg bold text-red-500">
-  //         Something went wrong while fetching data. Please try again later.
-  //       </p>
-        
-  //     </div>
-  //   )
-  // }
-
-  // if (!vans) {
-  //   return <p>Vans not found</p>
-  // }
+const HostVansGrid = ({ vans } : HostVansGridProps) => {
 
   return ( 
     <div className="flex flex-col gap-3">
-      {data.map((van) => (
+      {vans.map((van) => (
         <Link
           to={`/host/vans/${van.id}`}
           key={van.id}

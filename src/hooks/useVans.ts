@@ -15,32 +15,32 @@ const useVans = (url: string) => {
           throw new Error('Network response was not ok');
         }
 
-        const cacheKey = `vans-cache-${url}`;
-        const cachedVans = localStorage.getItem(cacheKey);
+        // const cacheKey = `vans-cache-${url}`;
+        // const cachedVans = localStorage.getItem(cacheKey);
   
-        if (cachedVans) {
-          try {
-            // Attempt to parse cached data
-            const parsedVans = JSON.parse(cachedVans);
-            if (Array.isArray(parsedVans)) {
-              setVans(parsedVans); // Set cached data if it's a valid array
-            } else {
-              console.warn('Cached data is not an array:', cachedVans);
-            }
-          } catch (error) {
-            console.error('Error parsing cached vans:', error);
-            localStorage.removeItem(cacheKey); // Optionally remove corrupted cache
-          }
-        }
+        // if (cachedVans) {
+        //   try {
+        //     // Attempt to parse cached data
+        //     const parsedVans = JSON.parse(cachedVans);
+        //     if (Array.isArray(parsedVans)) {
+        //       setVans(parsedVans); // Set cached data if it's a valid array
+        //     } else {
+        //       console.warn('Cached data is not an array:', cachedVans);
+        //     }
+        //   } catch (error) {
+        //     console.error('Error parsing cached vans:', error);
+        //     localStorage.removeItem(cacheKey); // Optionally remove corrupted cache
+        //   }
+        // }
 
         const data = await res.json()
         const vansData = data.vans
         setVans(vansData);
 
         // Update local storage with new data if different from cached data
-        if (!cachedVans || JSON.stringify(cachedVans) !== JSON.stringify(vansData)) {
-          localStorage.setItem(cacheKey, JSON.stringify(vansData));
-        }
+        // if (!cachedVans || JSON.stringify(cachedVans) !== JSON.stringify(vansData)) {
+        //   localStorage.setItem(cacheKey, JSON.stringify(vansData));
+        // }
 
       } catch (error) {
         if (error instanceof Error) {

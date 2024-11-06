@@ -1,22 +1,13 @@
 import { Link } from "react-router-dom";
-import useVans from "../../../hooks/useVans";
+// import useVans from "../../../hooks/useVans";
 import { phpFormatter } from "../../../utils/formatter";
+import { Van } from "../../../types/vans";
 
-const HostDashboardGrid = () => {
+interface HostDashboardGridProps {
+  vans: Van[]
+}
 
-  const { vans, error, loading } = useVans("/api/host/vans") 
-
-  if (loading) {
-    return <h1>Loading...</h1>
-  }
-
-  if (error) {
-    return <h2>Something went wrong while fetching data. Please try again later.</h2>
-  }
-
-  if (!vans) {
-    return <p>No vans available.</p>
-  }
+const HostDashboardGrid = ({ vans } : HostDashboardGridProps) => {
 
   return ( 
     <div className="flex flex-col gap-3">
