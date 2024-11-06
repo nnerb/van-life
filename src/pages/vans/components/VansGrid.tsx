@@ -4,20 +4,11 @@ import { Van } from "../../../types/vans";
 
 interface VansGridProps {
   vans: Van[];
-  error: string | null;
   searchParams: URLSearchParams,
   activeFilters: string[]
 }
 
-const VansGrid = ({ vans, error, searchParams, activeFilters }: VansGridProps) => {
-
-  if (vans.length === 0) {
-    return <h2>Loading...</h2>;
-  }
-
-  if (error) {
-    return <h2>Error: {error}</h2>;
-  }
+const VansGrid = ({ vans, searchParams, activeFilters }: VansGridProps) => {
 
   return ( 
     <div className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-8">

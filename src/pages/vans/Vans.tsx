@@ -1,8 +1,8 @@
 
 import { useEffect, useState } from "react";
-import useVans from "../../hooks/useVans";
 import VansGrid from "./components/VansGrid";
-import { useSearchParams } from "react-router-dom";
+import { useLoaderData, useSearchParams } from "react-router-dom";
+import { Van } from "../../types/vans";
 
 
 const filterTypes = [
@@ -13,7 +13,7 @@ const filterTypes = [
 
 const Vans = () => {
 
-  const { vans, error } = useVans("/api/vans")
+  const vans = useLoaderData() as Van[]
   const [activeFilters, setActiveFilters] = useState<string[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -72,7 +72,6 @@ const Vans = () => {
       </div>
       <VansGrid 
         vans={filteredVans} 
-        error={error} 
         searchParams={searchParams} 
         activeFilters={activeFilters}
 
