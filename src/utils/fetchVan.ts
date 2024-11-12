@@ -4,6 +4,16 @@ import { fetchVans } from "./fetchVans";
 export const fetchVan = async (url: string, id: string): Promise<Van> => {
   try {
 
+    const parsedId = parseInt(id)
+    
+    if (isNaN(parsedId)) {
+      throw {
+        message: `Invalid ID format: '${id}'. Please provide a valid numerical ID`,
+        statusText: "Bad Request",
+        status: 400,
+      } as FetchError;
+    }
+
     const vanUrl = url.startsWith('/api/vans') ? '/api/vans' : '/api/host/vans';
     const vans = await fetchVans(vanUrl);
     const van = vans.find((van) => van.id === id);
