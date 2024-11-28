@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react";
 import VansGrid from "./components/VansGrid";
 import { useSearchParams } from "react-router-dom";
-import { Van } from "../../types/vans";
+import { FetchError, Van } from "../../types/vans";
 import { useQuery } from "@tanstack/react-query";
 import { fetchVans } from "../../utils/fetchVans";
-
+import VansError from "../../components/VansError";
+import Loading from "../../components/Loading";
 
 const filterTypes = [
   { id: 1, name: 'Simple', color: "bg-red-500" },
@@ -18,7 +19,7 @@ const Vans = () => {
     data: vans,
     error,
     isLoading,
-  } = useQuery<Van[]>({
+  } = useQuery<Van[], FetchError>({
     queryKey: ['vans'],
     queryFn: () => fetchVans('/api/vans'),
   })
@@ -41,7 +42,6 @@ const Vans = () => {
     }
   }, [activeFilters, setSearchParams]);
 
-
   const toggleFilter = (type: string) => {
     const lowerCaseType = type.toLowerCase();
     setActiveFilters(prev => 
@@ -56,13 +56,14 @@ const Vans = () => {
     setSearchParams({})
   };
 
-
-  if (error && !isLoading) {
-    return <p>An error has occurred while fetching vans data.</p>;
-  }
-  
   if (isLoading) {
-    return <p>Fetching data...</p>;
+    return (
+      <Loading isLoading={isLoading}/>
+    );
+  }
+
+  if (error) {
+    return <VansError error={error}/>
   }
   
   if (!vans) {

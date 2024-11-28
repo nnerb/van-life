@@ -1,12 +1,8 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { phpFormatter } from "../../../utils/formatter";
 import HostDashboardGrid from "../components/HostDashboardGrid";
-import { Van } from "../../../types/vans";
 
 const Dashboard = () => {
-
-  const vans = useLoaderData() as Van[]
-
   return ( 
     <div className="flex flex-col">
       <div className="flex flex-col gap-6 px-5 py-9 bg-orange-100 rounded-lg">
@@ -29,7 +25,7 @@ const Dashboard = () => {
           <h1 className="font-inter-bold text-xl">Your listed vans</h1>
           <Link to="" className="ml-auto">View all</Link>
         </div>
-        <HostDashboardGrid vans={vans} />
+        <HostDashboardGrid />
       </div>
     </div>
    );

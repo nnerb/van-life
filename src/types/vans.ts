@@ -8,6 +8,7 @@ export interface Van {
 }
 
 export interface FetchError extends Error {
+  message: string;
   statusText: string;
   status: number;
 }

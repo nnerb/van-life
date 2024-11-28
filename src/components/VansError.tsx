@@ -1,17 +1,18 @@
-import { useRouteError } from "react-router-dom";
 import { FetchError } from "../types/vans";
 
-const VansError = () => {
-  const error = useRouteError() as FetchError
+const VansError = ({ error }: { error: FetchError | null }) => {
 
-  console.log('[API/HOST/VANS]: ', error)
+  if (!error) {
+    return null
+  }
 
-  return ( 
-    <div className="px-5">
-      <h1 className="text-3xl font-inter-bold">Error: {error.message}</h1>
-      <pre>{error.status} - {error.statusText}</pre>
-    </div>
-   );
-}
- 
-export default VansError;
+  const userFriendlyMessage = "Something went wrong. Please try again later.";
+
+  console.log("Error details:", error);
+
+  return (
+    <h1 className="text-2xl font-inter-bold text-red-500">Error: {userFriendlyMessage}</h1>
+  );
+};
+
+export default VansError
