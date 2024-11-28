@@ -7,8 +7,9 @@ export interface Van {
   type: "Simple" | "Rugged" | "Luxury";
 }
 
-export interface FetchError extends Error {
+export interface FetchError {
   message: string;
   statusText: string;
   status: number;
+  name: string;
 }
