@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchVans } from "../../utils/fetchVans";
 import VansError from "../../components/VansError";
 import Loading from "../../components/Loading";
+import OfflineError from "../../components/OfflineError";
 
 const filterTypes = [
   { id: 1, name: 'Simple', color: "bg-red-500" },
@@ -19,10 +20,13 @@ const Vans = () => {
     data: vans,
     error,
     isLoading,
+    refetch
   } = useQuery<Van[], FetchError>({
     queryKey: ['vans'],
     queryFn: () => fetchVans('/api/vans'),
   })
+
+  const vansList: Van[] = vans ?? [];
 
   const [activeFilters, setActiveFilters] = useState<string[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
@@ -56,23 +60,30 @@ const Vans = () => {
     setSearchParams({})
   };
 
+  const isOffline = !navigator.onLine;
+
   if (isLoading) {
     return (
       <Loading isLoading={isLoading}/>
     );
   }
 
+  if (isOffline) {
+    return <OfflineError onRetry={() => refetch()} />
+  }
+
+
   if (error) {
     return <VansError error={error}/>
   }
-  
-  if (!vans) {
+
+  if (vansList.length === 0) {
     return <p>No vans available to display.</p>;
   }
 
   const filteredVans = activeFilters.length > 0 
-    ? vans.filter((van) => activeFilters.includes(van.type.toLowerCase())) 
-    : vans;
+    ? vansList.filter((van) => activeFilters.includes(van.type.toLowerCase())) 
+    : vansList;
 
   return (
     <>

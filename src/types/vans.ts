@@ -4,9 +4,10 @@ export interface Van {
   price: number;
   description: string;
   imageUrl: string;
-  type: "Simple" | "Rugged" | "Luxury";
+  type: VanType
 }
 
+export type VanType = "Simple" | "Rugged" | "Luxury";
 export interface FetchError {
   message: string;
   statusText: string;

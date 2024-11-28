@@ -5,37 +5,52 @@ export const fetchVans = async (url: string): Promise<Van[]> => {
     const res = await fetch(url);
 
     if (!res.ok) {
-      throw {
+     const error: FetchError = {
         name: 'FetchError',
         message: "There was an issue fetching the data. Please try again later.", 
         statusText: res.statusText,
         status: res.status
-      } as FetchError;
+      } 
+      console.error(`Fetch failed for URL: ${url}`, error); 
+      throw error;
     }
 
     const data = await res.json();
     const vansData: Van[] = data.vans;
 
+    if (!Array.isArray(vansData)) {
+      const error: FetchError = {
+        name: 'FetchError',
+        message: "Invalid response format. Expected 'vans' array.",
+        statusText: res.statusText,
+        status: res.status,
+      };
+      console.error("Invalid data format:", data); 
+      throw error;
+    }
+   
     return vansData; 
-
+    
   } catch (error) {
     if (error instanceof Error) {
-      // Check if there's no internet (network error)
-      if (navigator.onLine === false) {
-        throw {
-          message: "No internet connection. Please check your network settings.",
-          statusText: "Network Error",
-          status: 0
-        } as FetchError;
-      }
-      
-      // Default error for other fetch failures
-      throw {
+      const networkError: FetchError = {
+        name: 'FetchError',
         message: "There was an issue fetching the data. Please try again later.",
         statusText: "Network Error",
-        status: 0
-      } as FetchError;
+        status: 0,
+      };
+      console.error("Network or unknown error:", error); // Log the original error for debugging
+      throw networkError;
     }
-    throw error;
+
+    // If the error is not an instance of Error, we throw a fallback error
+      const unknownError: FetchError = {
+        name: 'FetchError',
+        message: "An unknown error occurred. Please try again later.",
+        statusText: "Unknown Error",
+        status: 0,
+      };
+      console.error("Unknown error:", error); // Log the original error for debugging
+      throw unknownError;
   }
 };
