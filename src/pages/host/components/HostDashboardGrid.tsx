@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { phpFormatter } from "../../../utils/formatter";
 import { fetchVans } from "../../../utils/fetchVans";
 import { useQuery } from "@tanstack/react-query";
-import { Van } from "../../../types/vans";
+import { FetchError, Van } from "../../../types/vans";
+import VansError from "../../../components/VansError";
+import Loading from "../../../components/Loading";
 
 const HostDashboardGrid = () => {
 
@@ -10,23 +12,26 @@ const HostDashboardGrid = () => {
     data: hostVans,
     error,
     isLoading,
-  } = useQuery<Van[]>({
+  } = useQuery<Van[], FetchError>({
     queryKey: ['hostVans'],
     queryFn: () => fetchVans('/api/host/vans'),
     retry: 1
   })
 
   if (isLoading) {
-    return <p>Fetching data...</p>;
+    return (
+      <Loading isLoading={isLoading}/>
+    );
   }
-  
-  if (error && !isLoading) {
-    return <p>An error has occurred while fetching host vans data.</p>;
+
+  if (error) {
+    return <VansError error={error}/>
   }
   
   if (!hostVans) {
     return <p>No vans available to display.</p>;
   }
+
 
   return ( 
     <div className="flex flex-col gap-3">
