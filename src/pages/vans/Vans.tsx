@@ -1,8 +1,10 @@
 
 import { useEffect, useState } from "react";
 import VansGrid from "./components/VansGrid";
-import { useLoaderData, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Van } from "../../types/vans";
+import { useQuery } from "@tanstack/react-query";
+import { fetchVans } from "../../utils/fetchVans";
 
 
 const filterTypes = [
@@ -12,11 +14,18 @@ const filterTypes = [
 ]
 
 const Vans = () => {
+  const {
+    data: vans,
+    error,
+    isLoading,
+  } = useQuery<Van[]>({
+    queryKey: ['vans'],
+    queryFn: () => fetchVans('/api/vans'),
+  })
 
-  const vans = useLoaderData() as Van[]
   const [activeFilters, setActiveFilters] = useState<string[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
-
+  
   useEffect(() => {
     const typeParam = searchParams.get('type');
     if (typeParam) {
@@ -46,6 +55,19 @@ const Vans = () => {
     setActiveFilters([]);
     setSearchParams({})
   };
+
+
+  if (error && !isLoading) {
+    return <p>An error has occurred while fetching vans data.</p>;
+  }
+  
+  if (isLoading) {
+    return <p>Fetching data...</p>;
+  }
+  
+  if (!vans) {
+    return <p>No vans available to display.</p>;
+  }
 
   const filteredVans = activeFilters.length > 0 
     ? vans.filter((van) => activeFilters.includes(van.type.toLowerCase())) 

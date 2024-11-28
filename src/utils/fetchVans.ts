@@ -15,23 +15,6 @@ export const fetchVans = async (url: string): Promise<Van[]> => {
     const data = await res.json();
     const vansData: Van[] = data.vans;
 
-    const cacheKey = `vans-cache-${url}`;
-    const cachedVans = localStorage.getItem(cacheKey);
-
-    if (cachedVans) {
-      try {
-        const parsedVans = JSON.parse(cachedVans);    
-        if (JSON.stringify(parsedVans) !== JSON.stringify(vansData)) {
-          localStorage.setItem(cacheKey, JSON.stringify(vansData));
-        }
-        return vansData;
-      } catch (error) {
-        console.log('Error parsing cached vans:', error);
-        localStorage.removeItem(cacheKey); 
-      }
-    }
-
-    localStorage.setItem(cacheKey, JSON.stringify(vansData));
     return vansData; 
 
   } catch (error) {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Van } from "../types/vans";
 
 const useVan = (url: string) => {
-  const [van, setVan] = useState<Van | null>(null);  // Changed to store a single van object
+  const [van, setVan] = useState<Van | null>(null); 
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 

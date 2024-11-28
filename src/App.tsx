@@ -29,7 +29,7 @@ import HostVanInfo from './pages/host/pages/vans/van/HostVanInfo'
 import NotFoundPage from './components/NotFound'
 import VansError from './components/VansError'
 import { hostVansLoader } from './loaders/hostVansLoader'
-import { vansLoader } from './loaders/vansLoader'
+// import { vansLoader } from './loaders/vansLoader'
 import { vanLoader } from './loaders/vanLoader'
 import { hostVanLoader } from './loaders/hostVanLoader'
 
@@ -50,7 +50,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       </Route>
     <Route path="about" element={<About />}/>
     <Route path="vans" element={<VanLayout />}>
-      <Route index element={<Vans />} loader={vansLoader} errorElement={<VansError/>}/>
+      <Route index element={<Vans />} errorElement={<VansError/>}/>
       <Route path=":id" element={<VanDetail />} loader={vanLoader} errorElement={<VansError/>}/>
     </Route>
     <Route path="*" element={<NotFoundPage />}/>
