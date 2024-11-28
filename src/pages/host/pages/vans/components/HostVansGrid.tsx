@@ -1,13 +1,38 @@
 import { Link, } from "react-router-dom";
 // import useVans from "../../../../../hooks/useVans";
 import { phpFormatter } from "../../../../../utils/formatter";
-import { Van } from "../../../../../types/vans";
+import Loading from "../../../../../components/Loading";
+import VansError from "../../../../../components/VansError";
+import { fetchVans } from "../../../../../utils/fetchVans";
+import { useQuery } from "@tanstack/react-query";
+import { FetchError, Van } from "../../../../../types/vans";
 
-interface HostVansGridProps {
-  hostVans: Van[]
-}
 
-const HostVansGrid = ({ hostVans } : HostVansGridProps) => {
+const HostVansGrid = () => {
+
+  const {
+    data: hostVans,
+    error,
+    isLoading,
+  } = useQuery<Van[], FetchError>({
+    queryKey: ['hostVans'],
+    queryFn: () => fetchVans('/api/host/vans'),
+    retry: 1
+  })
+
+  if (isLoading) {
+    return (
+      <Loading isLoading={isLoading}/>
+    );
+  }
+
+  if (error) {
+    return <VansError error={error}/>
+  }
+  
+  if (!hostVans) {
+    return <p>No vans available to display.</p>;
+  }
 
   return ( 
     <div className="flex flex-col gap-3">
