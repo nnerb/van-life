@@ -6,10 +6,10 @@ import VansError from "../../../../../components/VansError";
 import { fetchVans } from "../../../../../utils/fetchVans";
 import { useQuery } from "@tanstack/react-query";
 import { FetchError, Van } from "../../../../../types/vans";
+import OfflineError from "../../../../../components/OfflineError";
 
 
 const HostVansGrid = () => {
-
   const {
     data: hostVans,
     error,
@@ -17,26 +17,31 @@ const HostVansGrid = () => {
   } = useQuery<Van[], FetchError>({
     queryKey: ['hostVans'],
     queryFn: () => fetchVans('/api/host/vans'),
-    retry: 1
+    retry: 1,
+    enabled: navigator.onLine
   })
+  const hostVansList: Van[] = hostVans ?? []
+  const isOffline = !navigator.onLine;
 
   if (isLoading) {
-    return (
-      <Loading isLoading={isLoading}/>
-    );
+    return <Loading isLoading={isLoading}/>
+  }
+
+  if (isOffline) {
+    return <OfflineError />
   }
 
   if (error) {
     return <VansError error={error}/>
   }
-  
-  if (!hostVans) {
+
+  if (hostVansList.length === 0) {
     return <p>No vans available to display.</p>;
   }
 
   return ( 
     <div className="flex flex-col gap-3">
-      {hostVans.map((hostVan) => (
+      {hostVansList.map((hostVan) => (
         <Link
           to={`/host/vans/${hostVan.id}`}
           key={hostVan.id}

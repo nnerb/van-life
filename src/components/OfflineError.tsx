@@ -1,17 +1,8 @@
-import React from 'react';
-
-interface OfflineErrorProps {
-  onRetry: () => void;
-}
-
-const OfflineError: React.FC<OfflineErrorProps> = ({ onRetry }) => {
+const OfflineError = () => {
   return (
-    <div>
-      <p>No network connection. Please check your internet connection.</p>
-      <button onClick={onRetry} className="bg-blue-500 text-white px-4 py-2 rounded-md">
-        Retry
-      </button>
-    </div>
+    <p className="text-center text-xl font-semibold text-red-600 bg-red-100 p-4 rounded-md shadow-md">
+      No network connection. Please check your internet connection.
+    </p>
   );
 };
 

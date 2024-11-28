@@ -20,10 +20,11 @@ const Vans = () => {
     data: vans,
     error,
     isLoading,
-    refetch
   } = useQuery<Van[], FetchError>({
     queryKey: ['vans'],
     queryFn: () => fetchVans('/api/vans'),
+    retry: 1,
+    enabled: navigator.onLine
   })
 
   const vansList: Van[] = vans ?? [];
@@ -63,15 +64,12 @@ const Vans = () => {
   const isOffline = !navigator.onLine;
 
   if (isLoading) {
-    return (
-      <Loading isLoading={isLoading}/>
-    );
+    return <Loading isLoading={isLoading}/>
   }
 
   if (isOffline) {
-    return <OfflineError onRetry={() => refetch()} />
+    return <OfflineError />
   }
-
 
   if (error) {
     return <VansError error={error}/>

@@ -11,7 +11,9 @@ const VansError = ({ error }: { error: FetchError | null }) => {
   console.log("Error details:", error);
 
   return (
-    <h1 className="text-2xl font-inter-bold text-red-500">Error: {userFriendlyMessage}</h1>
+    <h1 className="text-center text-xl font-semibold text-red-600 bg-red-100 p-4 rounded-md shadow-md">
+      Error: {userFriendlyMessage}
+    </h1>
   );
 };
 

@@ -7,11 +7,11 @@ export const fetchVans = async (url: string): Promise<Van[]> => {
     if (!res.ok) {
      const error: FetchError = {
         name: 'FetchError',
-        message: "There was an issue fetching the data. Please try again later.", 
+        message: `Failed to fetch data from ${url}. ${res.statusText}`, 
         statusText: res.statusText,
         status: res.status
       } 
-      console.error(`Fetch failed for URL: ${url}`, error); 
+      console.error(`Error fetching data from URL: ${url}`, error); 
       throw error;
     }
 
@@ -25,7 +25,7 @@ export const fetchVans = async (url: string): Promise<Van[]> => {
         statusText: res.statusText,
         status: res.status,
       };
-      console.error("Invalid data format:", data); 
+      console.error("Invalid data format received:", data); 
       throw error;
     }
    
@@ -35,15 +35,15 @@ export const fetchVans = async (url: string): Promise<Van[]> => {
     if (error instanceof Error) {
       const networkError: FetchError = {
         name: 'FetchError',
-        message: "There was an issue fetching the data. Please try again later.",
+        message: error.message || "There was an issue fetching the data. Please try again later.",
         statusText: "Network Error",
         status: 0,
       };
-      console.error("Network or unknown error:", error); // Log the original error for debugging
+      console.error("Network or unknown error:", error);
       throw networkError;
     }
 
-    // If the error is not an instance of Error, we throw a fallback error
+    // Catch-all for any other types of errors
       const unknownError: FetchError = {
         name: 'FetchError',
         message: "An unknown error occurred. Please try again later.",
