@@ -1,18 +1,59 @@
 import { Link } from "react-router-dom";
 import { phpFormatter } from "../../../utils/formatter";
-import { Van } from "../../../types/vans";
+import { FetchError, Van } from "../../../types/vans";
+import { useQuery } from "@tanstack/react-query";
+import { fetchVans } from "../../../utils/fetchVans";
+import Loading from "../../../components/Loading";
+import OfflineError from "../../../components/OfflineError";
+import VansError from "../../../components/VansError";
 
 interface VansGridProps {
-  vans: Van[];
   searchParams: URLSearchParams,
   activeFilters: string[]
 }
 
-const VansGrid = ({ vans, searchParams, activeFilters }: VansGridProps) => {
+const VansGrid = ( { searchParams, activeFilters }: VansGridProps) => {
+
+  const {
+    data: vans,
+    error,
+    isLoading,
+  } = useQuery<Van[], FetchError>({
+    queryKey: ['vans'],
+    queryFn: () => fetchVans('/api/vans'),
+    retry: 1,
+    enabled: navigator.onLine
+  })
+
+  const vansList: Van[] = vans ?? [];
+
+
+  const isOffline = !navigator.onLine;
+
+  if (isLoading) {
+    return <Loading isLoading={isLoading}/>
+  }
+
+  if (isOffline) {
+    return <OfflineError />
+  }
+
+  if (error) {
+    return <VansError error={error}/>
+  }
+
+  if (vansList.length === 0) {
+    return <p>No vans available to display.</p>;
+  }
+
+  const filteredVans = activeFilters.length > 0 
+    ? vansList.filter((van) => activeFilters.includes(van.type.toLowerCase())) 
+    : vansList;
+
 
   return ( 
     <div className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-8">
-      {vans.map((van) => (
+      {filteredVans.map((van) => (
         <Link 
           key={van.id} 
           to={van.id} 

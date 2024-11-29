@@ -14,9 +14,9 @@ import Vans from './pages/vans/Vans'
 import "./server"
 
 
-import VanDetail from './pages/vans/VanDetail'
+import VanDetail from './pages/vans/components/VanDetail'
 import Layout from './Layout'
-import VanLayout from './pages/vans/VanLayout'
+import VanLayout from './pages/vans/components/VanLayout'
 import Host from './pages/host/Host'
 import Dashboard from './pages/host/pages/Dashboard'
 import Income from './pages/host/pages/Income'
