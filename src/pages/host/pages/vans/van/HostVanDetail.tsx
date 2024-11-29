@@ -1,10 +1,45 @@
-import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { phpFormatter } from "../../../../../utils/formatter";
 import HostVanDetailNavbar from "./HostVanDetailNavbar";
-import { Van } from "../../../../../types/vans";
+import { FetchError, Van } from "../../../../../types/vans";
+import { fetchVan } from "../../../../../utils/fetchVan";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../../../components/Loading";
+import OfflineError from "../../../../../components/OfflineError";
+import VansError from "../../../../../components/VansError";
 
 const HostVanDetail = () => {
-  const hostVan = useLoaderData() as Van
+  const { id } = useParams<{ id: string }>()
+
+  const { 
+    data: hostVan, 
+    error,
+    isLoading,
+  } = useQuery<Van, FetchError>({
+    queryKey: ['van', id],
+    queryFn: () => fetchVan(`/api/host/vans/${id}`, id!),
+    enabled: navigator.onLine
+  })
+
+
+  const isOffline = !navigator.onLine;
+
+  if (isLoading) {
+    return <Loading isLoading={isLoading}/>
+  }
+
+  if (isOffline) {
+    return <OfflineError />
+  }
+
+  if (error) {
+    return <VansError error={error}/>
+  }
+
+  if (!hostVan) {
+    return <p>No van data available to display</p>
+  }
+
   return ( 
     <div className="px-5 flex flex-col">
       <div>

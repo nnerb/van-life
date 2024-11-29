@@ -1,6 +1,11 @@
-import { Link, useLoaderData, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { phpFormatter } from "../../utils/formatter";
-import { Van } from "../../types/vans";
+import { FetchError, Van } from "../../types/vans";
+import { useQuery } from "@tanstack/react-query";
+import { fetchVan } from "../../utils/fetchVan";
+import Loading from "../../components/Loading";
+import VansError from "../../components/VansError";
+import OfflineError from "../../components/OfflineError";
 interface LocationState {
   search: string;
   type: string[];
@@ -12,12 +17,42 @@ const VanDetail = () => {
   const backToVanUrl = state?.search || '';
   const types = state?.type || []
 
-  const van = useLoaderData() as Van;
+  const { id } = useParams<{ id: string }>()
+
+  const { 
+    data: van, 
+    error,
+    isLoading,
+  } = useQuery<Van, FetchError>({
+    queryKey: ['van', id],
+    queryFn: () => fetchVan(`/api/vans/${id}`, id!),
+    enabled: navigator.onLine
+  })
+
+  
   const getTypesText = (types: string[]) => {
     if (types.length === 1) return types[0];
     if (types.length === 2) return `${types[0]} and ${types[1]}`;
     return 'all'
   };
+  
+  const isOffline = !navigator.onLine;
+
+  if (isLoading) {
+    return <Loading isLoading={isLoading}/>
+  }
+
+  if (isOffline) {
+    return <OfflineError />
+  }
+
+  if (error) {
+    return <VansError error={error}/>
+  }
+
+  if (!van) {
+    return <p>No van data available to display</p>
+  }
 
   return ( 
     <div>
