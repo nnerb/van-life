@@ -22,7 +22,6 @@ const VansGrid = ( { searchParams, activeFilters }: VansGridProps) => {
     queryKey: ['vans'],
     queryFn: () => fetchVans('/api/vans'),
     retry: 1,
-    enabled: navigator.onLine
   })
 
   const vansList: Van[] = vans ?? [];

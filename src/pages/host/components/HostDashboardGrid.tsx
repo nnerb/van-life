@@ -17,7 +17,6 @@ const HostDashboardGrid = () => {
     queryKey: ['hostVans'],
     queryFn: () => fetchVans('/api/host/vans'),
     retry: 1,
-    enabled: navigator.onLine
   })
   const hostVansList: Van[] = hostVans ?? []
   const isOffline = !navigator.onLine;

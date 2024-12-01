@@ -19,7 +19,7 @@ const VanDetailContent = () => {
   } = useQuery<Van, FetchError>({
     queryKey: ['van', id],
     queryFn: () => fetchVan(`/api/vans/${id}`, id!),
-    enabled: navigator.onLine
+    retry: 1
   })
 
 
