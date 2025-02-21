@@ -1,50 +1,84 @@
-# React + TypeScript + Vite
+# 🚐 VanLife - Explore the #VanLife Movement!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**"You got the travel plans, we got the travel vans."**
 
-Currently, two official plugins are available:
+VanLife is a web app designed to explore different van rental options, built to practice **React Router, API handling, and caching**. It includes routing, filtering, and API mocking with MirageJS, making it a great project for learning client-side navigation and state management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features (In Progress)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Routing & Nested Routes with React Router** 🛤️
+- **404 Page for Non-existent Routes** ❌
+- **MirageJS for Mocking API Requests** ⚡
+- **React Query for Fetching & Caching Data** 🔄
+- **Filtering Vans by Type (Luxury, Rugged, Simple)** 🏕️
+- **Dynamic Van Details Page** 🚐
+- **Host Dashboard with Nested Routes** 👨‍💻
+- **Loading States & Performance Optimization** ⏳
+- **(Upcoming) Authentication & Full-Stack Integration** 🔐
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🛠️ Tech Stack
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Frontend
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- React (Vite) ⚡
+- TypeScript 🛠️
+- Tailwind CSS 🎨
+- React Router DOM 🚏
+- React Query 📡
+- MirageJS (Mock API) 🌐
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Backend (Future Enhancements)
+
+- Node.js + Express.js (Planned) 🖥️
+- MongoDB (Planned) 🗄️
+- Authentication with JWT (Planned) 🔑
+
+---
+
+## 📍 Current Pages & Routes
+
+### Public Routes
+
+- `/` - **Home Page**
+- `/about` - **About VanLife**
+- `/vans` - **Explore Vans** (Includes filters by type: `?type=luxury`)
+- `/vans/:vanId` - **Van Details Page**
+
+### Host Routes (Will be private)
+
+- `/host` - **Host Dashboard**
+- `/host/dashboard` - **Overview (default route)**
+- `/host/income` - **Income Statistics**
+- `/host/vans` - **List of Owned Vans**
+- `/host/vans/:vanId` - **Van Management** (Includes nested routes for details, pricing, and photos)
+
+---
+
+## 📜 Future Enhancements
+
+- ✅ Implement Authentication (Login, Signup)
+- ✅ Deploy a real backend (Express + MongoDB)
+- ✅ Improve UI/UX with animations & dark mode
+- ✅ Booking & Payment Integration
+
+---
+
+## 📺 Inspiration
+
+This project was inspired by [this YouTube tutorial](https://www.youtube.com/watch?v=nDGA3km5He4) with additional features and modifications.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have ideas, feel free to open an issue or submit a pull request.
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
